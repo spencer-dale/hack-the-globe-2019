@@ -1,0 +1,43 @@
+body {
+	position: relative;
+	text-align: center;
+	font-family: "Quicksand", sans-serif;
+}
+
+#page {}
+
+#page > h1 {
+	font-size: 5em;
+}
+
+#page > h2 {
+	font-size: 1.5em;
+}
+
+#page > h3 {
+	font-family: "Nunito", sans-serif;
+}
+
+.conversation {
+	margin-top: 100px;
+	display: inline-block;
+	width: 800px;
+	background-color: #e4ebf3;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+	border-radius: 10px;
+	box-shadow: 4px 4px 15px 5px #e9e9e9;
+}
+
+.input-wrapper {}
+#input-field {}
+
+.output-wrapper {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#output-field {
+
+}

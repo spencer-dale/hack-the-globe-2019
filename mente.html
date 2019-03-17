@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HackTheGlobe2019</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="./styles.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel|Assistant|Didact+Gothic|Nunito|Quicksand">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			var accessToken = "1d04062d38314d7fa5341aa55982c643";
+			var baseUrl = "https://api.api.ai/v1/";
+			$(document).ready(function() {
+				$("#input-field").keypress(function(event) {
+					if (event.which == 13) {
+						event.preventDefault();
+						send();
+					}
+				});
+			});
+			function setInput(text) {
+				$("#input-field").val(text);
+				send();
+			}
+			function send() {
+				var text = $("#input-field").val();
+				$.ajax({
+					type: "POST",
+					url: baseUrl + "query?v=20150910",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					headers: {
+						"Authorization": "Bearer " + accessToken
+					},
+					data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+					success: function(data) {
+						setResponse(JSON.stringify(data, undefined, 2));
+					},
+					error: function() {
+						setResponse("Internal Server Error");
+					}
+				});
+				setResponse("Loading...");
+			}
+			function setResponse(val) {
+				$("#output-field").text(val);
+			}
+			function send() {
+				var text = $("#input-field").val();
+				$.ajax({
+					type: "POST",
+					url: baseUrl + "query?v=20150910",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					headers: {
+						"Authorization": "Bearer " + accessToken
+					},
+					data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+					success: function(data) {
+						var respText = data.result.fulfillment.speech;
+						console.log("Respuesta: " + respText);
+						setResponse(respText);
+					},
+					error: function() {
+						setResponse("Internal Server Error");
+					}
+				});
+				setResponse("Thinking...");
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="page">
+			<h1>Mente:</h1>
+			<img src="" style="">
+			<h3>_________________________</h3>
+			<h2>A scalable first responder to mental health crises, powered by AI</h2>
+		</div>
+		<div class="conversation">
+			<div class="input-wrapper">
+				<p>Input</p>
+				<input id="input-field" type="text" style="width: 500px;">
+			</div>
+			<div class="output-wrapper">
+				<p>Response</p>
+				<textarea id="output-field" cols="100" rows="10"></textarea>
+			</div>
+		</div>
+	</body>
+</html>
